@@ -23,10 +23,7 @@ def get_scalars(vec_x, vec_f, poly, vec_w):
         return left, right
 
 def create_poly(poly_deg):
-    poly = []
-    for i in range(poly_deg+1):
-        poly.append(lambda x, i=i :x**i)
-    return poly
+    return [lambda x, i=i: x**i for i in range(poly_deg + 1)]
 
 
 def plot_results(vec_x, vec_f, coefs, poly=None):
