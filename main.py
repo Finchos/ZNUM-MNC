@@ -1,4 +1,7 @@
 import numpy as np
+import plt
+
+
 def smallest_squares (vec_x, vec_f, poly_deg, vec_w=None, poly=None):
     #@TODO kontroly správnosti vstupů
     if vec_w is None:
@@ -25,26 +28,45 @@ def create_poly(poly_deg):
         poly.append(lambda x, i=i :x**i)
     return poly
 
+
+def plot_results(vec_x, vec_f, coefs, poly=None):
+    # Pokud nejsou dodány bázové funkce, vytvoříme je podle počtu koeficientů
+    if poly is None:
+        poly = create_poly(len(coefs) - 1)
+
+    # Vykreslení původních naměřených dat
+    plt.scatter(vec_x, vec_f, color='red', marker='x', label='Naměřená data')
+
+    # Vytvoření jemnější osy x pro plynulou křivku
+    x_smooth = np.linspace(min(vec_x), max(vec_x), 200)
+
+    # Vyhodnocení polynomu pro všechny body x_smooth
+    y_smooth = np.zeros_like(x_smooth)
+    for i, c in enumerate(coefs):
+        # Aplikujeme i-tou bázovou funkci na x_smooth a vynásobíme koeficientem
+        y_smooth += c * np.vectorize(poly[i])(x_smooth).astype(float)
+
+    # Vykreslení aproximované křivky
+    plt.plot(x_smooth, y_smooth, color='blue', label=f'Aproximace (m={len(coefs) - 1})')
+
+    # Nastavení popisků a zobrazení grafu
+    plt.xlabel('x')
+    plt.ylabel('f(x)')
+    plt.title('Aproximation via smallest square method')
+    plt.legend()
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.show()
+
+
 def main():
-    res = smallest_squares(np.array([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6]), np.array([2.9,2.8,2.7,2.3,2.1,2.1, 1.7]),2)
-    print(res)
+    x_data = np.array([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6])
+    f_data = np.array([2.9, 2.8, 2.7, 2.3, 2.1, 2.1, 1.7])
+
+    res = smallest_squares(x_data, f_data, 2)
+    print("Found coeffs:", res)
+
+    plot_results(x_data, f_data, res)
 
 if __name__ == '__main__':
     main()
-
-def vyhul_mi_prdel_gagine73():
-    print("kojote")
-    #TODO
-
-
-def create_base(x,m):
-    pass # TODO
-
-
-def create_eq_system():
-    pass  # TODO
-
-
-def get_coefs_finchos():
-    pass  # TODO
 
