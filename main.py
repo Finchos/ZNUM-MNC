@@ -6,10 +6,6 @@ def smallest_squares (vec_x, vec_f, poly_deg, vec_w=None, poly=None):
     if poly is None:
         poly = create_poly(poly_deg)
     left_side_vectors, right_side_vectors = get_scalars(vec_x, vec_f, poly, vec_w)
-    coefs = get_coefs(left_side_vectors, right_side_vectors)
-    return coefs
-
-def get_coefs(left_side_vectors, right_side_vectors):
     return np.linalg.solve(left_side_vectors, right_side_vectors)
 
 def get_scalars(vec_x, vec_f, poly, vec_w):
@@ -22,16 +18,6 @@ def get_scalars(vec_x, vec_f, poly, vec_w):
             for j in range(n):
                 left[i, j] = (phi[i] * vec_w) @ phi[j]
         return left, right
-
-####TOTO ASI NIC UDELAL JSEM TO JINAK S CLAUDEM
-# def get_scalars(vec_x, vec_f,poly_deg, poly):
-#     left_side_vectors = np.array([]) #this shit needs to upravit
-#     right_side_vectors = np.array([])
-#         for i in range(poly_deg+1):  #@TODO vektory vah
-#             right_side_vectors = np.append(right_side_vectors, np.vectorize(poly[i])(vec_x) @ vec_f)
-#             for j in range(poly_deg+1):
-#                 left_side_vectors =np.append(left_side_vectors, np.vectorize(poly[i])(vec_x) @ np.vectorize(poly[j])(vec_x))
-#     return left_side_vectors, right_side_vectors
 
 def create_poly(poly_deg):
     poly = [] #@TODO check implementation
