@@ -3,7 +3,7 @@ import plt
 
 
 def smallest_squares (vec_x, vec_f, poly_deg, vec_w=None, poly=None):
-    #@TODO kontroly správnosti vstupů
+    #@TODO check correct input
     if vec_w is None:
         vec_w = np.ones(len(vec_x))
     if poly is None:
@@ -23,7 +23,7 @@ def get_scalars(vec_x, vec_f, poly, vec_w):
         return left, right
 
 def create_poly(poly_deg):
-    poly = [] #@TODO check implementation
+    poly = []
     for i in range(poly_deg+1):
         poly.append(lambda x, i=i :x**i)
     return poly
