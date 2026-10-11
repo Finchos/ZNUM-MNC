@@ -8,7 +8,7 @@ def smallest_squares (vec_x, vec_f, poly_deg, vec_w=None, poly=None):
     coefs = get_coefs(left_side_vectors, right_side_vectors)
 
 def get_coefs(left_side_vectors, right_side_vectors):
-
+    pass #TODO
 
 def get_scalars(vec_x, vec_f,poly_deg, poly):
     left_side_vectors = np.array() #this shit needs to upravit
