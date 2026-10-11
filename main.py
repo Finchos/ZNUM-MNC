@@ -1,5 +1,6 @@
 import numpy as np
 def smallest_squares (vec_x, vec_f, poly_deg, vec_w=None, poly=None):
+    #@TODO kontroly správnosti vstupů
     if vec_w is None:
         vec_w = np.ones(poly_deg)
     if poly is None:
@@ -20,7 +21,7 @@ def get_scalars(vec_x, vec_f,poly_deg, poly):
     return left_side_vectors, right_side_vectors
 
 def create_poly(poly_deg):
-    poly = []
+    poly = [] #@TODO check implementation
     for i in range(poly_deg):
         poly.append(lambda x:x**i)
     return poly
