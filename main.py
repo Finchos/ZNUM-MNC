@@ -45,3 +45,20 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+def vyhul_mi_prdel_gagine73():
+    print("kojote")
+    #TODO
+
+
+def create_base(x,m):
+    pass # TODO
+
+
+def create_eq_system():
+    pass  # TODO
+
+
+def get_coefs_finchos():
+    pass  # TODO
+
