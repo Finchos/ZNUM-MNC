@@ -9,22 +9,31 @@ def smallest_squares (vec_x, vec_f, poly_deg, vec_w=None, poly=None):
     if poly is None:
         poly = create_poly(poly_deg)
     left_side_vectors, right_side_vectors = get_scalars(vec_x, vec_f, poly, vec_w)
+    print_lin_eq(left_side_vectors, right_side_vectors)
     return np.linalg.solve(left_side_vectors, right_side_vectors)
 
 def get_scalars(vec_x, vec_f, poly, vec_w):
         n = len(poly)
         phi = [np.vectorize(p)(vec_x).astype(float) for p in poly]
+        print(phi)
         left = np.empty((n, n))
         right = np.empty(n)
         for i in range(n):
             right[i] = (phi[i] * vec_w) @ vec_f
-            for j in range(n):
+            for j in range(i, n):
                 left[i, j] = (phi[i] * vec_w) @ phi[j]
+                if i!=j:
+                    left[j, i] = left[i, j]
         return left, right
 
 def create_poly(poly_deg):
     return [lambda x, i=i: x**i for i in range(poly_deg + 1)]
 
+def print_lin_eq(A, x):
+    for i in range(len(A)):
+        for j in range(len(A[0])):
+            print(A[i][j], "", end="")
+        print("| ", x[i])
 
 def plot_results(vec_x, vec_f, coefs, poly=None):
     # Pokud nejsou dodány bázové funkce, vytvoříme je podle počtu koeficientů
