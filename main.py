@@ -2,7 +2,7 @@ import numpy as np
 import plt
 
 
-def smallest_squares (vec_x, vec_f, poly_deg, vec_w=None, poly=None):
+def smallest_squares(vec_x, vec_f, poly_deg, vec_w=None, poly=None):
     if vec_w is None:
         vec_w = np.ones(len(vec_x))
     if poly is None:
@@ -86,9 +86,6 @@ def main():
 
 
     calculate_and_visualize(x_data, f_data, 2)
-
-
-#TODO printnovat hodnoty, optimalizovat, vizualizovat vsechny priklady
 
 if __name__ == '__main__':
     main()
