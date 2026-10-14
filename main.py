@@ -27,29 +27,28 @@ def create_poly(poly_deg):
 
 
 def plot_results(vec_x, vec_f, coefs, poly=None):
-    # Pokud nejsou dodány bázové funkce, vytvoříme je podle počtu koeficientů
+
     if poly is None:
         poly = create_poly(len(coefs) - 1)
 
-    # Vykreslení původních naměřených dat
+    # Vykreslení dat
     plt.scatter(vec_x, vec_f, color='red', marker='x', label='Naměřená data')
 
     # Vytvoření jemnější osy x pro plynulou křivku
     x_smooth = np.linspace(min(vec_x), max(vec_x), 200)
 
-    # Vyhodnocení polynomu pro všechny body x_smooth
+    # Vyhodnocení polynomu
     y_smooth = np.zeros_like(x_smooth)
     for i, c in enumerate(coefs):
-        # Aplikujeme i-tou bázovou funkci na x_smooth a vynásobíme koeficientem
         y_smooth += c * np.vectorize(poly[i])(x_smooth).astype(float)
 
-    # Vykreslení aproximované křivky
+    # Vykreslení
     plt.plot(x_smooth, y_smooth, color='blue', label=f'Aproximace (m={len(coefs) - 1})')
 
-    # Nastavení popisků a zobrazení grafu
+    # Nastavení
     plt.xlabel('x')
     plt.ylabel('f(x)')
-    plt.title('Aproximation via smallest square method')
+    plt.title('Approximation via smallest square method')
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.show()
@@ -63,6 +62,8 @@ def main():
     print("Found coeffs:", res)
 
     plot_results(x_data, f_data, res)
+
+#TODO printnovat hodnoty, optimalizovat, vizualizovat vsechny priklady
 
 if __name__ == '__main__':
     main()
